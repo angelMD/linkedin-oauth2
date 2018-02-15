@@ -3,19 +3,33 @@ module LinkedIn
   # Raised when users call a deprecated function
   class Deprecated < StandardError; end
 
-  # Raised when we know requests will be malformed
+  # Raised when we know requests will be malformed and LinkedIn returns
+  # a 400 status code
   class InvalidRequest < StandardError; end
-  
-  # Raised when we get a throttle error from the API
-  class ThrottleError < StandardError; end
+
+  # Raised when LinkedIn returns a 401 status code during an API
+  # request.
+  class UnauthorizedError < StandardError; end
+
+  # Raised when LinkedIn returns a 403 status code during an API
+  # request.
+  class AccessDeniedError < StandardError; end
+
+  # Raised when LinkedIn returns a 404 status code during an API
+  # request.
+  class NotFoundError < StandardError; end
+
+  # Raised when LinkedIn returns a 500 status code during an API
+  # request.
+  class InformLinkedInError < StandardError; end
+
+  # Raised when LinkedIn returns a 502+ status code during an API
+  # request.
+  class UnavailableError < StandardError; end
 
   # Raised when LinkedIn returns a non 400+ status code during an OAuth
   # request.
   class OAuthError < OAuth2::Error; end
-
-  # Raised when LinkedIn returns a non 400+ status code during an API
-  # request
-  class APIError < OAuth2::Error; end
 
   module ErrorMessages
     class << self
